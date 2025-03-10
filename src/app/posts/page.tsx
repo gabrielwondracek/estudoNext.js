@@ -9,6 +9,11 @@ interface ResponseProps {
   posts: PostProps[];
 }
 
+async function clicado() {
+  "use server";
+  console.log("clicou");
+}
+
 export default async function PostsPage() {
   const response = await fetch("https://dummyjson.com/posts");
   const data: ResponseProps = await response.json();
@@ -16,6 +21,7 @@ export default async function PostsPage() {
   return (
     <div>
       <h1>Todos os Posts</h1>
+      <button onClick={clicado}>CLIQUE</button>
       <div>
         {data.posts.map((post) => (
           <div key={post.id}>
