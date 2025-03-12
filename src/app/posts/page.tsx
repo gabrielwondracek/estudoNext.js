@@ -14,6 +14,12 @@ async function clicado() {
   console.log("clicou");
 }
 
+async function forms(formData: FormData) {
+  "use server";
+  const userId = formData.get("userId");
+  console.log(userId);
+}
+
 export default async function PostsPage() {
   const response = await fetch("https://dummyjson.com/posts");
   const data: ResponseProps = await response.json();
@@ -21,6 +27,10 @@ export default async function PostsPage() {
   return (
     <div>
       <h1>Todos os Posts</h1>
+      <form action={forms}>
+        <input type="text" name="userId" className="bg-white text-black" />
+        <button type="submit">Enviar</button>
+      </form>
       <button onClick={clicado}>CLIQUE</button>
       <div>
         {data.posts.map((post) => (
